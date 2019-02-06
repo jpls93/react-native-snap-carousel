@@ -36,7 +36,7 @@ export default class Pagination extends PureComponent {
         vertical: false
     }
 
-    constructor (props) {
+    constructor(props) {
         super(props);
 
         // Warnings
@@ -60,17 +60,17 @@ export default class Pagination extends PureComponent {
         }
     }
 
-    _needsRTLAdaptations () {
+    _needsRTLAdaptations() {
         const { vertical } = this.props;
         return IS_RTL && !IS_IOS && !vertical;
     }
 
-    get _activeDotIndex () {
+    get _activeDotIndex() {
         const { activeDotIndex, dotsLength } = this.props;
         return this._needsRTLAdaptations() ? dotsLength - activeDotIndex - 1 : activeDotIndex;
     }
 
-    get dots () {
+    get dots() {
         const {
             activeOpacity,
             carouselRef,
@@ -93,16 +93,16 @@ export default class Pagination extends PureComponent {
         }
 
         const DefaultDot = <PaginationDot
-          carouselRef={carouselRef}
-          tappable={tappableDots && typeof carouselRef !== 'undefined'}
-          activeOpacity={activeOpacity}
-          color={dotColor}
-          containerStyle={dotContainerStyle}
-          style={dotStyle}
-          inactiveColor={inactiveDotColor}
-          inactiveOpacity={inactiveDotOpacity}
-          inactiveScale={inactiveDotScale}
-          inactiveStyle={inactiveDotStyle}
+            carouselRef={carouselRef}
+            tappable={tappableDots && typeof carouselRef !== 'undefined'}
+            activeOpacity={activeOpacity}
+            color={dotColor}
+            containerStyle={dotContainerStyle}
+            style={dotStyle}
+            inactiveColor={inactiveDotColor}
+            inactiveOpacity={inactiveDotOpacity}
+            inactiveScale={inactiveDotScale}
+            inactiveStyle={inactiveDotStyle}
         />;
 
         let dots = [];
@@ -122,7 +122,7 @@ export default class Pagination extends PureComponent {
         return dots;
     }
 
-    render () {
+    render() {
         const { dotsLength, containerStyle, vertical } = this.props;
 
         if (!dotsLength || dotsLength < 2) {
@@ -131,16 +131,17 @@ export default class Pagination extends PureComponent {
 
         const style = [
             styles.sliderPagination,
-            { flexDirection: vertical ?
-                'column' :
-                (this._needsRTLAdaptations() ? 'row-reverse' : 'row')
+            {
+                flexDirection: vertical ?
+                    'column' :
+                    (this._needsRTLAdaptations() ? 'row-reverse' : 'row')
             },
             containerStyle || {}
         ];
 
         return (
             <View pointerEvents={'box-none'} style={style}>
-                { this.dots }
+                {this.dots}
             </View>
         );
     }

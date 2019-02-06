@@ -20,7 +20,7 @@ export default class PaginationDot extends PureComponent {
         tappable: PropTypes.bool
     };
 
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
             animColor: new Animated.Value(0),
@@ -29,19 +29,19 @@ export default class PaginationDot extends PureComponent {
         };
     }
 
-    componentDidMount () {
+    componentDidMount() {
         if (this.props.active) {
             this._animate(1);
         }
     }
 
-    componentWillReceiveProps (nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.active !== this.props.active) {
             this._animate(nextProps.active ? 1 : 0);
         }
     }
 
-    _animate (toValue = 0) {
+    _animate(toValue = 0) {
         const { animColor, animOpacity, animTransform } = this.state;
 
         const commonProperties = {
@@ -73,12 +73,12 @@ export default class PaginationDot extends PureComponent {
         Animated.parallel(animations).start();
     }
 
-    get _shouldAnimateColor () {
+    get _shouldAnimateColor() {
         const { color, inactiveColor } = this.props;
         return color && inactiveColor;
     }
 
-    render () {
+    render() {
         const { animColor, animOpacity, animTransform } = this.state;
         const {
             active,
