@@ -11,6 +11,7 @@ import {
     stackAnimatedStyles,
     tinderAnimatedStyles
 } from '../utils/animations';
+import ViewOverflow from 'react-native-view-overflow';
 
 const IS_IOS = Platform.OS === 'ios';
 
@@ -18,6 +19,7 @@ const IS_IOS = Platform.OS === 'ios';
 // See: https://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html
 const AnimatedFlatList = FlatList ? Animated.createAnimatedComponent(FlatList) : null;
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
+const AnimatedViewOverflow = Animated.createAnimatedComponent(ViewOverflow);
 
 // React Native automatically handles RTL layouts; unfortunately, it's buggy with horizontal ScrollView
 // See https://github.com/facebook/react-native/issues/11960
@@ -1156,7 +1158,7 @@ export default class Carousel extends Component {
         }
 
         const animate = this._shouldAnimateSlides();
-        const Component = animate ? Animated.View : View;
+        const Component = animate ? AnimatedViewOverflow : ViewOverflow;
         const animatedStyle = animate ? this._getSlideInterpolatedStyle(index, animatedValue) : {};
 
         const parallaxProps = hasParallaxImages ? {
@@ -1261,7 +1263,8 @@ export default class Carousel extends Component {
             numColumns: 1,
             getItemLayout: undefined, // see #193
             initialScrollIndex: undefined, // see #193
-            keyExtractor: keyExtractor || this._getKeyExtractor
+            keyExtractor: keyExtractor || this._getKeyExtractor,
+            CellRendererComponent: ViewOverflow,
         } : {};
 
         return {
